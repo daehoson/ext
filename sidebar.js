@@ -118,6 +118,36 @@ Ext.onReady(function () {
 
         items: [{
             xtype: 'panel',
+            region: 'north',
+            height: 50,
+            layout: {
+                type: 'hbox',
+                pack: 'start',
+                align: 'middle'
+            },
+            items: [{
+                xtype: 'component',
+                html: '<h1>My Application</h1>',
+                margin: '0 20'
+            }, {
+                xtype: 'container',
+                layout: 'hbox',
+                items: [{
+                    xtype: 'button',
+                    text: 'Menu 1',
+                    handler: function () { /* Menu 1 button handler */ }
+                }, {
+                    xtype: 'button',
+                    text: 'Menu 2',
+                    handler: function () { /* Menu 2 button handler */ }
+                }, {
+                    xtype: 'button',
+                    text: 'Menu 3',
+                    handler: function () { /* Menu 3 button handler */ }
+                }]
+            }]
+        }, {
+            xtype: 'panel',
             region: 'west',
             width: 200,
             split: true,
@@ -167,12 +197,4 @@ Ext.onReady(function () {
             items: [contentPanel]
         }]
     });
-    function addCustomStyles() {
-        var style = document.createElement('style');
-        style.innerHTML = '.custom-sidemenu .x-panel-header { background-color: black; color: white; }';
-        document.head.appendChild(style);
-    }
-    
-    // 스타일 추가 함수 호출
-    addCustomStyles();
 });
