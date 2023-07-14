@@ -1,11 +1,34 @@
-Ext.onReady(function () {
+
+Ext.onReady(function(){
     // 중앙 콘텐츠 영역에 표시될 컴포넌트
     var contentPanel = Ext.create('Ext.panel.Panel', {
-        layout: 'fit',
+        layout: 'card',
+        items: [{
+            xtype: 'container',
+            fieldLabel: '필드 내용',
+            labelAlign: 'card',
+            readOnly: true
+        }]
+    });
+
+    // 폼 패널
+    var formPanel = Ext.create('Ext.form.Panel', {
+        bodyPadding: 10,
         items: [{
             xtype: 'textfield',
-            fieldLabel: '필드 내용',
-            labelAlign: 'top',
+            fieldLabel: '제목',
+            readOnly: true
+        }, {
+            xtype: 'textfield',
+            fieldLabel: '작성자',
+            readOnly: true
+        }, {
+            xtype: 'textfield',
+            fieldLabel: '날짜',
+            readOnly: true
+        }, {
+            xtype: 'textareafield',
+            fieldLabel: '내용',
             readOnly: true
         }]
     });
@@ -24,13 +47,11 @@ Ext.onReady(function () {
                     contentPanel.update('회원가입 폼을 로드할 수 없습니다.');
                 }
             });
-        
-        }else if (record.get('text') === 'Menu 2') {
+        } else if (record.get('text') === 'Menu 2') {
             contentPanel.removeAll();
-    
+
             var gridStore = Ext.create('Ext.data.Store', {
                 fields: ['title', 'author', 'date'],
-                cls: 'custom-sidemenu', // 클래스 추가
                 data: [
                     { title: '게시물 1', author: '작성자 1', date: '2023-06-30' },
                     { title: '게시물 2', author: '작성자 2', date: '2023-07-01' },
@@ -38,24 +59,20 @@ Ext.onReady(function () {
                     { title: '게시물 4', author: '작성자 4', date: '2023-07-01' },
                     { title: '게시물 5', author: '작성자 5', date: '2023-07-01' },
                     { title: '게시물 6', author: '작성자 2', date: '2023-07-01' },
-                    { title: '게시물 2', author: '작성자 2', date: '2023-07-01' },
-                    { title: '게시물 2', author: '작성자 2', date: '2023-07-01' },
-                    { title: '게시물 2', author: '작성자 2', date: '2023-07-01' },
-                    { title: '게시물 2', author: '작성자 2', date: '2023-07-01' },
-                    { title: '게시물 2', author: '작성자 2', date: '2023-07-01' },
-                    { title: '게시물 2', author: '작성자 2', date: '2023-07-01' },
-                    { title: '게시물 2', author: '작성자 2', date: '2023-07-01' },
-                    { title: '게시물 2', author: '작성자 2', date: '2023-07-01' },
-                    { title: '게시물 2', author: '작성자 2', date: '2023-07-01' },
-                    { title: '게시물 3', author: '작성자 3', date: '2023-07-02' }
-                ],
-                pageSize: 10, // Number of records to display per page
-                proxy: {
-                  type: 'memory',
-                  enablePaging: true
-                }
+                    { title: '게시물 7', author: '작성자 2', date: '2023-07-01' },
+                    { title: '게시물 8', author: '작성자 2', date: '2023-07-01' },
+                    { title: '게시물 9', author: '작성자 2', date: '2023-07-01' },
+                    { title: '게시물 10', author: '작성자 2', date: '2023-07-01' },
+                    { title: '게시물 11', author: '작성자 2', date: '2023-07-01' },
+                    { title: '게시물 12', author: '작성자 2', date: '2023-07-01' },
+                    { title: '게시물 13', author: '작성자 2', date: '2023-07-01' },
+                    { title: '게시물 14', author: '작성자 2', date: '2023-07-01' },
+                    { title: '게시물 15', author: '작성자 2', date: '2023-07-01' },
+                    { title: '게시물 16', author: '작성자 2', date: '2023-07-01' },
+                    { title: '게시물 17', author: '작성자 3', date: '2023-07-02' }
+                ]
             });
-    
+
             var grid = Ext.create('Ext.grid.Panel', {
                 store: gridStore,
                 columns: [
@@ -70,7 +87,10 @@ Ext.onReady(function () {
                     displayMsg: 'Displaying {0} - {1} of {2}',
                     emptyMsg: 'No data to display',
                     items: [
-                        { xtype: 'button', text: 'Add', handler: function () { /* Add button handler */ } },
+                        { xtype: 'button', text: 'Add', handler: function () { 
+                            contentPanel.removeAll();
+                            /* Add button handler */ } 
+                        },
                         { xtype: 'button', text: 'Edit', handler: function () { /* Edit button handler */ } },
                         { xtype: 'button', text: 'Delete', handler: function () { /* Delete button handler */ } },
                         '-',
@@ -100,22 +120,27 @@ Ext.onReady(function () {
                             }
                         }
                     ]
+                },
+                listeners: {
+                    itemclick: function (grid, record) {
+                        alert("hi");
+                        formPanel.getForm().setValues(record.data);
+                        // contentPanel.setActiveItem(formPanel); // Switch to the form panel
+                    }
                 }
             });
-    
-            contentPanel.add(grid);
-        }else {
+
+            contentPanel.add(grid); // Add the grid to the content panel
+            // contentPanel.add(formPanel); // Add the form panel to the content panel
+        } else {
             contentPanel.removeAll();
         }
-        // if (record.get('leaf')) {
-        //     var text = record.get('text');
-        //     contentPanel.down('textfield').setValue(text);
-        // }
     };
+
     Ext.create('Ext.container.Viewport', {
         layout: 'border',
-        renderTo: Ext.getBody(),
-
+        // renderTo: Ext.getBody(),
+        // renderTo: 'myApp',
         items: [{
             xtype: 'panel',
             region: 'north',
