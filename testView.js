@@ -1,4 +1,94 @@
 Ext.onReady(function() {
+    var gridStore = Ext.create('Ext.data.Store', {
+        fields: ['title', 'author', 'date'],
+        data: [
+            { title: '게시물 1', author: '작성자 1', date: '2023-06-30' },
+            { title: '게시물 2', author: '작성자 2', date: '2023-07-01' },
+            { title: '게시물 3', author: '작성자 3', date: '2023-07-01' },
+            { title: '게시물 4', author: '작성자 4', date: '2023-07-01' },
+            { title: '게시물 5', author: '작성자 5', date: '2023-07-01' },
+            { title: '게시물 6', author: '작성자 2', date: '2023-07-01' },
+            { title: '게시물 7', author: '작성자 2', date: '2023-07-01' },
+            { title: '게시물 8', author: '작성자 2', date: '2023-07-01' },
+            { title: '게시물 9', author: '작성자 2', date: '2023-07-01' },
+            { title: '게시물 10', author: '작성자 2', date: '2023-07-01' },
+            { title: '게시물 11', author: '작성자 2', date: '2023-07-01' },
+            { title: '게시물 12', author: '작성자 2', date: '2023-07-01' }
+        ]
+    });
+    var grid = Ext.create('Ext.grid.Panel', {
+        store: gridStore,
+        columns: [
+            { text: '제목', dataIndex: 'title', flex: 1 },
+            { text: '작성자', dataIndex: 'author', width: 100 },
+            { text: '날짜', dataIndex: 'date', width: 100 }
+        ],
+        bbar: {
+            xtype: 'pagingtoolbar',
+            store: gridStore,
+            displayInfo: true,
+            displayMsg: 'Displaying {0} - {1} of {2}',
+            emptyMsg: 'No data to display',
+            items: [
+                { xtype: 'button', text: 'Add', handler: function () { 
+                    contentPanel.removeAll();
+                    /* Add button handler */ } 
+                },
+                { xtype: 'button', text: 'Edit', handler: function () { /* Edit button handler */ } },
+                { xtype: 'button', text: 'Delete', handler: function () { /* Delete button handler */ } },
+                '-',
+                { xtype: 'button', text: 'Refresh', handler: function () { /* Refresh button handler */ } },
+                { xtype: 'button', text: 'Export', handler: function () { /* Export button handler */ } },
+                { xtype: 'button', text: 'Print', handler: function () { /* Print button handler */ } },
+                '-',
+                {
+                    xtype: 'textfield',
+                    emptyText: 'Search',
+                    width: 150,
+                    listeners: {
+                        change: function (field, newValue, oldValue, eOpts) {
+                            // Perform search based on the entered value
+                            gridStore.clearFilter();
+                            if (newValue) {
+                                var searchValue = newValue.toLowerCase();
+                                gridStore.filterBy(function (record) {
+                                    return (
+                                        record.get('title').toLowerCase().indexOf(searchValue) !== -1 ||
+                                        record.get('author').toLowerCase().indexOf(searchValue) !== -1 ||
+                                        record.get('date').toLowerCase().indexOf(searchValue) !== -1
+                                    );
+                                });
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        listeners: {
+            itemclick: function (grid, record) {
+                alert("hi");
+                formPanel.getForm().setValues(record.data);
+                // contentPanel.setActiveItem(formPanel); // Switch to the form panel
+            }
+        }
+    });
+    var gridStore2 = Ext.create('Ext.data.Store', {
+        fields: ['title', 'author', 'date'],
+        data: [
+            { title: '게시물 11', author: '작성자 1', date: '2023-06-30' },
+            { title: '게시물 12', author: '작성자 2', date: '2023-07-01' },
+            { title: '게시물 13', author: '작성자 3', date: '2023-07-01' },
+            { title: '게시물 14', author: '작성자 4', date: '2023-07-01' },
+            { title: '게시물 15', author: '작성자 5', date: '2023-07-01' },
+            { title: '게시물 16', author: '작성자 2', date: '2023-07-01' },
+            { title: '게시물 17', author: '작성자 2', date: '2023-07-01' },
+            { title: '게시물 18', author: '작성자 2', date: '2023-07-01' },
+            { title: '게시물 19', author: '작성자 2', date: '2023-07-01' },
+            { title: '게시물 110', author: '작성자 2', date: '2023-07-01' },
+            { title: '게시물 111', author: '작성자 2', date: '2023-07-01' },
+            { title: '게시물 112', author: '작성자 2', date: '2023-07-01' }
+        ]
+    });
     // 메뉴 버튼 핸들러
     var menuButtonClickHandler = function(btn) {
         var text = btn.getText();
@@ -91,13 +181,67 @@ Ext.onReady(function() {
                 if (text === 'Menu 1') {
                     content = '메뉴 1 내용';
                 } else if (text === 'Menu 2') {
-                    content = '메뉴 2 내용';
+                    // content = '메뉴 2 내용';
+                    middlePanel.removeAll();
+                    if (middlePanel.items.length === 0) {
+                        middlePanel.add(Ext.create('Ext.grid.Panel', {
+                            store: gridStore2,
+                            columns: [
+                                { text: '제목', dataIndex: 'title', flex: 1 },
+                                { text: '작성자', dataIndex: 'author', width: 100 },
+                                { text: '날짜', dataIndex: 'date', width: 100 }
+                            ],
+                            bbar: {
+                                xtype: 'pagingtoolbar',
+                                store: gridStore2,
+                                displayInfo: true,
+                                displayMsg: 'Displaying {0} - {1} of {2}',
+                                emptyMsg: 'No data to display'
+                            },
+                            listeners: {
+                                itemclick: function(grid, record) {
+                                    alert('hi');
+                                    // formPanel.getForm().setValues(record.data);
+                                    // contentPanel.setActiveItem(formPanel); // Switch to the form panel
+                                }
+                            }
+                        }));
+                    } else {
+                        middlePanel.items.getAt(0).reconfigure(gridStore2);
+                    }
                 } else if (text === 'Menu 3') {
-                    content = '메뉴 3 내용';
+                    // content = '메뉴 3 내용';
+                    middlePanel.removeAll();
+                    if (middlePanel.items.length === 0) {
+                        middlePanel.add(Ext.create('Ext.grid.Panel', {
+                            store: gridStore,
+                            columns: [
+                                { text: '제목', dataIndex: 'title', flex: 1 },
+                                { text: '작성자', dataIndex: 'author', width: 100 },
+                                { text: '날짜', dataIndex: 'date', width: 100 }
+                            ],
+                            bbar: {
+                                xtype: 'pagingtoolbar',
+                                store: gridStore,
+                                displayInfo: true,
+                                displayMsg: 'Displaying {0} - {1} of {2}',
+                                emptyMsg: 'No data to display'
+                            },
+                            listeners: {
+                                itemclick: function(grid, record) {
+                                    alert('hi');
+                                    // formPanel.getForm().setValues(record.data);
+                                    // contentPanel.setActiveItem(formPanel); // Switch to the form panel
+                                }
+                            }
+                        }));
+                    } else {
+                        middlePanel.items.getAt(0).reconfigure(gridStore2);
+                    }
                 }
 
                 // 중간 레이아웃에 내용 표시
-                middlePanel.update(content);
+                // middlePanel.update(content);
             }
         }
     });
