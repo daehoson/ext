@@ -102,7 +102,6 @@ Ext.onReady(function() {
             { title: '게시물 18', author: '작성자 2', date: '2023-07-01' },
             { title: '게시물 19', author: '작성자 2', date: '2023-07-01' },
             { title: '게시물 110', author: '작성자 2', date: '2023-07-01' },
-            { title: '게시물 111', author: '작성자 2', date: '2023-07-01' },
             { title: '게시물 112', author: '작성자 2', date: '2023-07-01' }
         ]
     });
@@ -241,16 +240,6 @@ Ext.onReady(function() {
             },
             { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
             	MESURE_BGNDT: '20230804222608',	MESURE_ENDDT: '20230805062508',
-                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
-                REM_SLEEP_TIME:'70',	TOTAL:'479'
-            },
-            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
-            	MESURE_BGNDT: '20230803222608',	MESURE_ENDDT: '20230804062508',
-                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
-                REM_SLEEP_TIME:'70',	TOTAL:'479'
-            },
-            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
-            	MESURE_BGNDT: '20230802222608',	MESURE_ENDDT: '20230803062508',
                 AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
                 REM_SLEEP_TIME:'70',	TOTAL:'479'
             },
