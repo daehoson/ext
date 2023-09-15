@@ -224,11 +224,6 @@ Ext.onReady(function() {
                 REM_SLEEP_TIME:'70',	TOTAL:'479'
             },
             { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
-            	MESURE_BGNDT: '20230805222608',	MESURE_ENDDT: '20230806062508',
-                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
-                REM_SLEEP_TIME:'70',	TOTAL:'479'
-            },
-            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
             	MESURE_BGNDT: '20230804222608',	MESURE_ENDDT: '20230805062508',
                 AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
                 REM_SLEEP_TIME:'70',	TOTAL:'479'
