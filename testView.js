@@ -388,6 +388,11 @@ Ext.onReady(function() {
                                 id: 6,
                                 text: '권한설정',
                                 leaf: true
+                            },
+                            {
+                                id: 7,
+                                text: '환경설정',
+                                leaf: true
                             }
                         ]
                     }
