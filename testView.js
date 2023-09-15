@@ -42,6 +42,23 @@ Ext.onReady(function() {
                 { xtype: 'button', text: 'Print', handler: function () { /* Print button handler */ } },
                 '-',
                 {
+                    xtype: 'button',
+                    text: 'Export to Excel',
+                    handler: function () {
+                        // Create a worksheet object from the grid store data
+                        var worksheet = XLSX.utils.json_to_sheet(gridStore.getData().items.map(function (record) {
+                            return record.data;
+                        }));
+    
+                        // Create a workbook and add the worksheet to it
+                        var workbook = XLSX.utils.book_new();
+                        XLSX.utils.book_append_sheet(workbook, worksheet, 'Grid Data');
+    
+                        // Save the workbook as an Excel file
+                        XLSX.writeFile(workbook, 'grid_data.xlsx');
+                    }
+                },
+                {
                     xtype: 'textfield',
                     emptyText: 'Search',
                     width: 150,
@@ -89,6 +106,257 @@ Ext.onReady(function() {
             { title: '게시물 112', author: '작성자 2', date: '2023-07-01' }
         ]
     });
+    var gridStore3 = Ext.create('Ext.data.Store', {
+        fields: ['title', 'author', 'date'],
+        data: [
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230806222608',	MESURE_ENDDT: '20230807062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230805222608',	MESURE_ENDDT: '20230806062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230804222608',	MESURE_ENDDT: '20230805062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230803222608',	MESURE_ENDDT: '20230804062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230802222608',	MESURE_ENDDT: '20230803062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230805222608',	MESURE_ENDDT: '20230806062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230804222608',	MESURE_ENDDT: '20230805062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230803222608',	MESURE_ENDDT: '20230804062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230802222608',	MESURE_ENDDT: '20230803062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230805222608',	MESURE_ENDDT: '20230806062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230804222608',	MESURE_ENDDT: '20230805062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230803222608',	MESURE_ENDDT: '20230804062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230802222608',	MESURE_ENDDT: '20230803062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230805222608',	MESURE_ENDDT: '20230806062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230804222608',	MESURE_ENDDT: '20230805062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230803222608',	MESURE_ENDDT: '20230804062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230802222608',	MESURE_ENDDT: '20230803062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230805222608',	MESURE_ENDDT: '20230806062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230804222608',	MESURE_ENDDT: '20230805062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230803222608',	MESURE_ENDDT: '20230804062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230802222608',	MESURE_ENDDT: '20230803062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230805222608',	MESURE_ENDDT: '20230806062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230804222608',	MESURE_ENDDT: '20230805062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230803222608',	MESURE_ENDDT: '20230804062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230802222608',	MESURE_ENDDT: '20230803062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230805222608',	MESURE_ENDDT: '20230806062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230804222608',	MESURE_ENDDT: '20230805062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230803222608',	MESURE_ENDDT: '20230804062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230802222608',	MESURE_ENDDT: '20230803062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230805222608',	MESURE_ENDDT: '20230806062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230804222608',	MESURE_ENDDT: '20230805062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230803222608',	MESURE_ENDDT: '20230804062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230802222608',	MESURE_ENDDT: '20230803062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230805222608',	MESURE_ENDDT: '20230806062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230804222608',	MESURE_ENDDT: '20230805062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230803222608',	MESURE_ENDDT: '20230804062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230802222608',	MESURE_ENDDT: '20230803062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230805222608',	MESURE_ENDDT: '20230806062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230804222608',	MESURE_ENDDT: '20230805062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230803222608',	MESURE_ENDDT: '20230804062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230802222608',	MESURE_ENDDT: '20230803062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230805222608',	MESURE_ENDDT: '20230806062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230804222608',	MESURE_ENDDT: '20230805062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230803222608',	MESURE_ENDDT: '20230804062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230802222608',	MESURE_ENDDT: '20230803062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230805222608',	MESURE_ENDDT: '20230806062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230804222608',	MESURE_ENDDT: '20230805062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230803222608',	MESURE_ENDDT: '20230804062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230802222608',	MESURE_ENDDT: '20230803062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            }
+        ]
+    });
+
     // 메뉴 버튼 핸들러
     var menuButtonClickHandler = function(btn) {
         var text = btn.getText();
@@ -118,9 +386,48 @@ Ext.onReady(function() {
         handler: menuButtonClickHandler
     });
 
-    var button3 = Ext.create('Ext.button.Button', {
-        text: 'Menu 3',
-        handler: menuButtonClickHandler
+    var idArray = ['AWAKE_SLEEP_TIME','LIGHT_SLEEP_TIME','DEEP_SLEEP_TIME','REM_SLEEP_TIME','TOTAL'];
+    var originalData = []; // 원래 데이터 저장할 배열
+    // 데이터 스토어의 초기 상태를 originalData 배열에 복사
+    gridStore3.each(function (record) {
+        var originalRecordData = {};
+        for (var i = 0; i < idArray.length; i++) {
+            var fieldName = idArray[i];
+            originalRecordData[fieldName] = record.get(fieldName);
+        }
+        originalData.push(originalRecordData);
+    });
+
+    var convertTimeButton = Ext.create('Ext.button.Button', {
+        text: '시간 단위로 변환',
+        renderTo: Ext.getBody(),
+        handler: function () {
+            // 데이터 스토어의 각 레코드를 반복하여 분을 시간으로 변환
+            gridStore3.each(function (record) {
+                for(var i=0;  i<idArray.length; i++){
+                    var minutes = record.get(idArray[i]);
+                    var hours = Math.floor(minutes / 60);
+                    var remainderMinutes = minutes % 60;
+                    var formattedTime = hours + '시간 ' + remainderMinutes + '분';
+                    record.set(idArray[i], formattedTime);
+                }
+            });
+        }
+    });
+    // "되돌리기" 버튼 생성
+    var resetButton = Ext.create('Ext.button.Button', {
+        text: '되돌리기',
+        renderTo: Ext.getBody(),
+        handler: function () {
+            // originalData 배열에 저장된 원래 데이터로 스토어 복원
+            gridStore3.each(function (record, index) {
+                var originalRecordData = originalData[index];
+                for (var i = 0; i < idArray.length; i++) {
+                    var fieldName = idArray[i];
+                    record.set(fieldName, originalRecordData[fieldName]);
+                }
+            });
+        }
     });
 
     // 상단 레이아웃
@@ -141,7 +448,7 @@ Ext.onReady(function() {
             {
                 xtype: 'container',
                 layout: 'hbox',
-                items: [button1, button2, button3]
+                items: [button1, button2, convertTimeButton, resetButton]
             }
         ]
     });
@@ -155,19 +462,40 @@ Ext.onReady(function() {
         title: '사이드 메뉴',
         store: Ext.create('Ext.data.TreeStore', {
             root: {
+                text: '관리용 메뉴',
                 expanded: true,
                 children: [
                     {
-                        text: 'Menu 1',
+                        id: 1,
+                        text: '전북대 측정데이터 조회',
                         leaf: true
                     },
                     {
-                        text: 'Menu 2',
+                        id: 2,
+                        text: '월말 예산 할당',
                         leaf: true
                     },
                     {
-                        text: 'Menu 3',
+                        id: 3,
+                        text: '헬스맥스 캐쉬 관리',
                         leaf: true
+                    },
+                    {
+                        id: 4,
+                        text: '메뉴관리',
+                        leaf: false, // 여기서는 폴더(노드)로 표시
+                        children: [
+                            {
+                                id: 5,
+                                text: '메뉴설정',
+                                leaf: true
+                            },
+                            {
+                                id: 6,
+                                text: '권한설정',
+                                leaf: true
+                            }
+                        ]
                     }
                 ]
             }
@@ -175,12 +503,123 @@ Ext.onReady(function() {
         listeners: {
             itemclick: function(tree, record) {
                 var text = record.get('text');
+                var id = record.get('id');
                 var content = '';
 
                 // 메뉴 아이템에 따른 내용 설정
-                if (text === 'Menu 1') {
-                    content = '메뉴 1 내용';
-                } else if (text === 'Menu 2') {
+                if (id === 1) {
+                    // content = '메뉴 1 내용';
+                    middlePanel.removeAll();
+                    if (middlePanel.items.length === 0) {
+                        middlePanel.add(Ext.create('Ext.grid.Panel', {
+                            store: gridStore3,
+                            columns: [
+                                { text: '이름', dataIndex: 'NM', width: 100 },
+                                { text: '핸드폰번호', dataIndex: 'MBTLNUM', width: 100 },
+                                { text: '측정코드', dataIndex: 'MESURE_CODE', width: 100 },
+                                { text: '시작시간', dataIndex: 'MESURE_BGNDT', width: 170,        
+                                    renderer: function (value) {
+                                        // Format the date and time (assuming 'value' is in YYYYMMDDHHmmss format)
+                                        return Ext.Date.format(Ext.Date.parse(value, 'YmdHis'), 'Y-m-d H:i:s');
+                                    }
+                                },
+                                { text: '끝난시간', dataIndex: 'MESURE_ENDDT', width: 170,        
+                                    renderer: function (value) {
+                                        // Format the date and time (assuming 'value' is in YYYYMMDDHHmmss format)
+                                        return Ext.Date.format(Ext.Date.parse(value, 'YmdHis'), 'Y-m-d H:i:s');
+                                    }
+                                },
+                                { text: '깬 수면시간', dataIndex: 'AWAKE_SLEEP_TIME', width: 100 },
+                                { text: '얕은 수면시간', dataIndex: 'LIGHT_SLEEP_TIME', width: 100 },
+                                { text: '깊은 수면시간', dataIndex: 'DEEP_SLEEP_TIME', width: 100 },
+                                { text: '램 수면시간', dataIndex: 'REM_SLEEP_TIME', width: 100 },
+                                { text: '총 수면시간', dataIndex: 'TOTAL', width: 100 }
+                            ],
+                            bbar: {
+                                xtype: 'pagingtoolbar',
+                                store: gridStore3,
+                                displayInfo: true,
+                                displayMsg: 'Displaying {0} - {1} of {2}',
+                                emptyMsg: 'No data to display',
+                                items:[
+                                    {
+                                        xtype: 'button',
+                                        text: 'Export to Excel',
+                                        handler: function () {
+                                            var modifiedData = gridStore3.getData().items.map(function (record) {
+                                                return {
+                                                    NM: record.get('NM'),
+                                                    MBTLNUM: record.get('MBTLNUM'),
+                                                    MESURE_CODE: record.get('MESURE_CODE'),
+                                                    MESURE_BGNDT: Ext.Date.format(Ext.Date.parse(record.get('MESURE_BGNDT'), 'YmdHis'), 'Y-m-d H:i:s'),
+                                                    MESURE_ENDDT: Ext.Date.format(Ext.Date.parse(record.get('MESURE_ENDDT'), 'YmdHis'), 'Y-m-d H:i:s'),
+                                                    AWAKE_SLEEP_TIME: record.get('AWAKE_SLEEP_TIME'),
+                                                    LIGHT_SLEEP_TIME: record.get('LIGHT_SLEEP_TIME'),
+                                                    DEEP_SLEEP_TIME: record.get('DEEP_SLEEP_TIME'),
+                                                    REM_SLEEP_TIME: record.get('REM_SLEEP_TIME'),
+                                                    TOTAL: record.get('TOTAL')
+                                                };
+                                            });
+                                            var worksheet = XLSX.utils.json_to_sheet(modifiedData);
+
+                                            // Create a workbook and add the worksheet to it
+                                            var workbook = XLSX.utils.book_new();
+                                            XLSX.utils.book_append_sheet(workbook, worksheet, 'Grid Data');
+
+                                            // Save the workbook as an Excel file
+                                            XLSX.writeFile(workbook, 'grid_data.xlsx');
+                                        }
+                                    },
+                                    '->', // 우측 정렬을 위한 패딩
+                                    {
+                                        xtype: 'textfield',
+                                        fieldLabel: '날짜 검색', // 필드 레이블
+                                        labelWidth: 80, // 필드 레이블 너비
+                                        emptyText: 'YYYY-MM-DD', // 플레이스홀더 텍스트
+                                        listeners: {
+                                            change: function (field, newValue, oldValue) {
+                                                // 사용자가 필드 값을 변경할 때마다 스토어 필터링
+                                                gridStore3.filterBy(function (record) {
+                                                    var measureStartDate = Ext.Date.format(Ext.Date.parse(record.get('MESURE_BGNDT'), 'Y-m-d H:i:s'), 'Y-m-d');
+                                                    return measureStartDate === newValue;
+                                                });
+                                            }
+                                        }
+                                    },
+                                    {
+                                        xtype: 'textfield',
+                                        fieldLabel: '핸드폰 번호 검색',
+                                        labelWidth: 110,
+                                        emptyText: '핸드폰 번호 입력',
+                                        listeners: {
+                                            change: function (field, newValue, oldValue) {
+                                                gridStore3.filter('MBTLNUM', newValue);
+                                            }
+                                        }
+                                    },
+                                    {
+                                        xtype: 'button',
+                                        text: 'Clear Filters', // 필터 지우기 버튼
+                                        handler: function () {
+                                            gridStore3.clearFilter();
+                                            // 필터를 지우고 모든 데이터를 다시 표시합니다.
+                                        }
+                                    }
+                                ]
+                            },
+                            listeners: {
+                                itemclick: function(grid, record) {
+                                    // alert('Dragging is not available');
+                                    // formPanel.getForm().setValues(record.data);
+                                    // contentPanel.setActiveItem(formPanel); // Switch to the form panel
+                                }
+                            }
+                        }));
+                        
+                    } else {
+                        middlePanel.items.getAt(0).reconfigure(gridStore2);
+                    }
+                } else if (id === 2) {
                     // content = '메뉴 2 내용';
                     middlePanel.removeAll();
                     if (middlePanel.items.length === 0) {
@@ -209,7 +648,7 @@ Ext.onReady(function() {
                     } else {
                         middlePanel.items.getAt(0).reconfigure(gridStore2);
                     }
-                } else if (text === 'Menu 3') {
+                } else if (id === 3) {
                     // content = '메뉴 3 내용';
                     middlePanel.removeAll();
                     if (middlePanel.items.length === 0) {
@@ -248,7 +687,7 @@ Ext.onReady(function() {
     // 윗단 레이아웃
     var upperPanel = Ext.create('Ext.panel.Panel', {
         region: 'north',
-        height: 100,
+        height: 30,
         html: '윗단 레이아웃'
     });
 
@@ -263,7 +702,7 @@ Ext.onReady(function() {
     // 하단 레이아웃
     var bottomPanel = Ext.create('Ext.panel.Panel', {
         region: 'south',
-        height: 100,
+        height: 550,
         html: '하단 레이아웃'
     });
 
