@@ -91,6 +91,7 @@ Ext.onReady(function() {
     });
     var gridStore2 = Ext.create('Ext.data.Store', {
         fields: ['title', 'author', 'date'],
+        pageSize: 10, // 페이지 크기 설정
         data: [
             { title: '게시물 11', author: '작성자 1', date: '2023-06-30' },
             { title: '게시물 12', author: '작성자 2', date: '2023-07-01' },
@@ -100,13 +101,17 @@ Ext.onReady(function() {
             { title: '게시물 16', author: '작성자 2', date: '2023-07-01' },
             { title: '게시물 17', author: '작성자 2', date: '2023-07-01' },
             { title: '게시물 18', author: '작성자 2', date: '2023-07-01' },
-            { title: '게시물 19', author: '작성자 2', date: '2023-07-01' },
-            { title: '게시물 110', author: '작성자 2', date: '2023-07-01' },
-            { title: '게시물 112', author: '작성자 2', date: '2023-07-01' }
+            { title: '게시물 19', author: '작성자 2', date: '2023-07-01' }
         ]
     });
+    var pageSize = 100;
     var gridStore3 = Ext.create('Ext.data.Store', {
         fields: ['title', 'author', 'date'],
+        pageSize: pageSize,
+        proxy: {
+            type: 'memory',
+            enablePaging: true
+        },
         data: [
             { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
             	MESURE_BGNDT: '20230806222608',	MESURE_ENDDT: '20230807062508',
@@ -125,6 +130,16 @@ Ext.onReady(function() {
             },
             { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
             	MESURE_BGNDT: '20230803222608',	MESURE_ENDDT: '20230804062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230802222608',	MESURE_ENDDT: '20230803062508',
+                AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
+                REM_SLEEP_TIME:'70',	TOTAL:'479'
+            },
+            { NM: '손대호',	MBTLNUM: '01026496108',	MESURE_CODE: '4040',
+            	MESURE_BGNDT: '20230805222608',	MESURE_ENDDT: '20230806062508',
                 AWAKE_SLEEP_TIME: '9',	LIGHT_SLEEP_TIME: '271',	DEEP_SLEEP_TIME: '129',
                 REM_SLEEP_TIME:'70',	TOTAL:'479'
             },
@@ -248,6 +263,10 @@ Ext.onReady(function() {
             content = '메뉴 2 내용';
         } else if (text === 'Menu 3') {
             content = '메뉴 3 내용';
+        }
+
+        if(text === 'pagesize'){
+            pageSize = 25;
         }
 
         // 상단 레이아웃에 내용 표시
@@ -425,6 +444,7 @@ Ext.onReady(function() {
                                 displayInfo: true,
                                 displayMsg: 'Displaying {0} - {1} of {2}',
                                 emptyMsg: 'No data to display',
+                                pageSize: 10, // 페이지당 아이템 수를 10으로 설정
                                 items:[
                                     {
                                         xtype: 'button',
@@ -455,20 +475,96 @@ Ext.onReady(function() {
                                         }
                                     },
                                     '->', // 우측 정렬을 위한 패딩
+                                    // {
+                                    //     xtype: 'datefield',
+                                    //     fieldLabel: '시작 날짜',
+                                    //     labelWidth: 80,
+                                    //     emptyText: '날짜 선택',
+                                    //     format: 'Y-m-d', // 날짜 형식,
+                                    //     editable: false,
+                                    //     listeners: {
+                                    //         select: function (field, date) {
+                                    //             // 선택한 날짜로 스토어 필터링
+                                    //             var formattedDate = Ext.Date.format(date, 'Y-m-d');
+                                    //             gridStore3.clearFilter(true);
+                                    //             gridStore3.filterBy(function (record) {
+                                    //                 var measureStartDate = Ext.Date.format(Ext.Date.parse(record.get('MESURE_BGNDT'), 'YmdHis'), 'Y-m-d');
+                                    //                 return measureStartDate === formattedDate;
+                                    //             });
+                                    //         },
+                                    //         clear: function () {
+                                    //             // 필터 클리어
+                                    //             gridStore3.clearFilter();
+                                    //         }
+                                    //     }
+                                    // },
                                     {
-                                        xtype: 'textfield',
-                                        fieldLabel: '날짜 검색', // 필드 레이블
-                                        labelWidth: 80, // 필드 레이블 너비
-                                        emptyText: 'YYYY-MM-DD', // 플레이스홀더 텍스트
+                                        xtype: 'datefield',
+                                        fieldLabel: '시작 날짜',
+                                        labelWidth: 80,
+                                        emptyText: '날짜 선택',
+                                        format: 'Y-m-d', // 날짜 형식,
+                                        editable: false,
+                                        id: 'startDateField',
                                         listeners: {
-                                            change: function (field, newValue, oldValue) {
-                                                // 사용자가 필드 값을 변경할 때마다 스토어 필터링
+                                            select: function (field, date) {
+                                                var endDateField = Ext.getCmp('endDateField');
+                                                var endDate = endDateField.getValue();
+                                                if (endDate && date > endDate) {
+                                                    Ext.Msg.alert('Error', '시작 날짜는 종료 날짜보다 이전이어야 합니다.');
+                                                    field.reset();
+                                                    return;
+                                                }
+                                                gridStore3.clearFilter(true);
                                                 gridStore3.filterBy(function (record) {
-                                                    var measureStartDate = Ext.Date.format(Ext.Date.parse(record.get('MESURE_BGNDT'), 'Y-m-d H:i:s'), 'Y-m-d');
-                                                    return measureStartDate === newValue;
+                                                    var measureStartDate = Ext.Date.format(Ext.Date.parse(record.get('MESURE_ENDDT'), 'YmdHis'), 'Y-m-d');
+                                                    return measureStartDate >= Ext.Date.format(date, 'Y-m-d');
                                                 });
+                                                updateDataCount(); // 데이터 수 업데이트
+                                            },
+                                            clear: function () {
+                                                // 필터 클리어
+                                                gridStore3.clearFilter();
+                                                updateDataCount(); // 데이터 수 업데이트
                                             }
                                         }
+                                    },
+                                    {
+                                        xtype: 'datefield',
+                                        fieldLabel: '종료 날짜',
+                                        labelWidth: 80,
+                                        emptyText: '날짜 선택',
+                                        format: 'Y-m-d', // 날짜 형식,
+                                        editable: false,
+                                        id: 'endDateField',
+                                        listeners: {
+                                            select: function (field, date) {
+                                                var startDateField = Ext.getCmp('startDateField');
+                                                console.log(startDateField);
+                                                var startDate = startDateField.getValue();
+                                                if (startDate && date < startDate) {
+                                                    Ext.Msg.alert('Error', '종료 날짜는 시작 날짜보다 이후이어야 합니다.');
+                                                    field.reset();
+                                                    return;
+                                                }
+                                                gridStore3.clearFilter(true);
+                                                gridStore3.filterBy(function (record) {
+                                                    var measureEndDate = Ext.Date.format(Ext.Date.parse(record.get('MESURE_BGNDT'), 'YmdHis'), 'Y-m-d');
+                                                    return measureEndDate <= Ext.Date.format(date, 'Y-m-d');
+                                                });
+                                                updateDataCount(); // 데이터 수 업데이트
+                                            },
+                                            clear: function () {
+                                                // 필터 클리어
+                                                gridStore3.clearFilter();
+                                                updateDataCount(); // 데이터 수 업데이트
+                                            }
+                                        }
+                                    },
+                                    {
+                                        xtype: 'label',
+                                        text: '조회된 데이터 수: 0', // 초기 값
+                                        id: 'dataCountLabel' // 레이블의 ID
                                     },
                                     {
                                         xtype: 'textfield',
@@ -491,6 +587,7 @@ Ext.onReady(function() {
                                     }
                                 ]
                             },
+                            renderTo: Ext.getBody(),
                             listeners: {
                                 itemclick: function(grid, record) {
                                     // alert('Dragging is not available');
@@ -585,8 +682,13 @@ Ext.onReady(function() {
 
     // 하단 레이아웃
     var bottomPanel = Ext.create('Ext.panel.Panel', {
-        region: 'south',
-        height: 550,
+        region: 'south',        
+        // collapsible: true,
+        split: true,
+        bodyPadding: 10,
+        height: 500,
+        minHeight: 250,
+        maxHeight: 550,
         html: '하단 레이아웃'
     });
 
@@ -600,4 +702,14 @@ Ext.onReady(function() {
             items: [upperPanel, middlePanel, bottomPanel]
         }]
     });
+    
+
+    // ============================== function 모아두기 ====================================
+
+    // 데이터 수 업데이트 함수
+    function updateDataCount() {
+        var dataCountLabel = Ext.getCmp('dataCountLabel');
+        var totalCount = gridStore3.getCount();
+        dataCountLabel.setText('조회된 데이터 수: ' + totalCount);
+    }
 });
