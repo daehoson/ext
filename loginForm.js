@@ -1,8 +1,3 @@
-// Ext.define('TestView', {
-//   extend: 'Ext.panel.Panel',
-//   title: 'Test View',
-//   html: 'This is the content of the Test View.'
-// });
 Ext.onReady(function() {
   var loginForm = Ext.create('Ext.form.Panel', {
     layout: 'center',

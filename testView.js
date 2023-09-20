@@ -7,101 +7,17 @@ Ext.onReady(function() {
             { title: '게시물 3', author: '작성자 3', date: '2023-07-01' },
             { title: '게시물 4', author: '작성자 4', date: '2023-07-01' },
             { title: '게시물 5', author: '작성자 5', date: '2023-07-01' },
-            { title: '게시물 6', author: '작성자 2', date: '2023-07-01' },
-            { title: '게시물 7', author: '작성자 2', date: '2023-07-01' },
-            { title: '게시물 8', author: '작성자 2', date: '2023-07-01' },
-            { title: '게시물 9', author: '작성자 2', date: '2023-07-01' },
-            { title: '게시물 10', author: '작성자 2', date: '2023-07-01' },
-            { title: '게시물 11', author: '작성자 2', date: '2023-07-01' },
-            { title: '게시물 12', author: '작성자 2', date: '2023-07-01' }
+            { title: '게시물 6', author: '작성자 2', date: '2023-07-01' }
         ]
     });
-    var grid = Ext.create('Ext.grid.Panel', {
-        store: gridStore,
-        columns: [
-            { text: '제목', dataIndex: 'title', flex: 1 },
-            { text: '작성자', dataIndex: 'author', width: 100 },
-            { text: '날짜', dataIndex: 'date', width: 100 }
-        ],
-        bbar: {
-            xtype: 'pagingtoolbar',
-            store: gridStore,
-            displayInfo: true,
-            displayMsg: 'Displaying {0} - {1} of {2}',
-            emptyMsg: 'No data to display',
-            items: [
-                { xtype: 'button', text: 'Add', handler: function () { 
-                    contentPanel.removeAll();
-                    /* Add button handler */ } 
-                },
-                { xtype: 'button', text: 'Edit', handler: function () { /* Edit button handler */ } },
-                { xtype: 'button', text: 'Delete', handler: function () { /* Delete button handler */ } },
-                '-',
-                { xtype: 'button', text: 'Refresh', handler: function () { /* Refresh button handler */ } },
-                { xtype: 'button', text: 'Export', handler: function () { /* Export button handler */ } },
-                { xtype: 'button', text: 'Print', handler: function () { /* Print button handler */ } },
-                '-',
-                {
-                    xtype: 'button',
-                    text: 'Export to Excel',
-                    handler: function () {
-                        // Create a worksheet object from the grid store data
-                        var worksheet = XLSX.utils.json_to_sheet(gridStore.getData().items.map(function (record) {
-                            return record.data;
-                        }));
-    
-                        // Create a workbook and add the worksheet to it
-                        var workbook = XLSX.utils.book_new();
-                        XLSX.utils.book_append_sheet(workbook, worksheet, 'Grid Data');
-    
-                        // Save the workbook as an Excel file
-                        XLSX.writeFile(workbook, 'grid_data.xlsx');
-                    }
-                },
-                {
-                    xtype: 'textfield',
-                    emptyText: 'Search',
-                    width: 150,
-                    listeners: {
-                        change: function (field, newValue, oldValue, eOpts) {
-                            // Perform search based on the entered value
-                            gridStore.clearFilter();
-                            if (newValue) {
-                                var searchValue = newValue.toLowerCase();
-                                gridStore.filterBy(function (record) {
-                                    return (
-                                        record.get('title').toLowerCase().indexOf(searchValue) !== -1 ||
-                                        record.get('author').toLowerCase().indexOf(searchValue) !== -1 ||
-                                        record.get('date').toLowerCase().indexOf(searchValue) !== -1
-                                    );
-                                });
-                            }
-                        }
-                    }
-                }
-            ]
-        },
-        listeners: {
-            itemclick: function (grid, record) {
-                alert("hi");
-                formPanel.getForm().setValues(record.data);
-                // contentPanel.setActiveItem(formPanel); // Switch to the form panel
-            }
-        }
-    });
+
     var gridStore2 = Ext.create('Ext.data.Store', {
         fields: ['title', 'author', 'date'],
         pageSize: 10, // 페이지 크기 설정
         data: [
             { title: '게시물 11', author: '작성자 1', date: '2023-06-30' },
             { title: '게시물 12', author: '작성자 2', date: '2023-07-01' },
-            { title: '게시물 13', author: '작성자 3', date: '2023-07-01' },
-            { title: '게시물 14', author: '작성자 4', date: '2023-07-01' },
-            { title: '게시물 15', author: '작성자 5', date: '2023-07-01' },
-            { title: '게시물 16', author: '작성자 2', date: '2023-07-01' },
-            { title: '게시물 17', author: '작성자 2', date: '2023-07-01' },
-            { title: '게시물 18', author: '작성자 2', date: '2023-07-01' },
-            { title: '게시물 19', author: '작성자 2', date: '2023-07-01' }
+            { title: '게시물 13', author: '작성자 3', date: '2023-07-01' }
         ]
     });
     var pageSize = 100;
@@ -475,29 +391,6 @@ Ext.onReady(function() {
                                         }
                                     },
                                     '->', // 우측 정렬을 위한 패딩
-                                    // {
-                                    //     xtype: 'datefield',
-                                    //     fieldLabel: '시작 날짜',
-                                    //     labelWidth: 80,
-                                    //     emptyText: '날짜 선택',
-                                    //     format: 'Y-m-d', // 날짜 형식,
-                                    //     editable: false,
-                                    //     listeners: {
-                                    //         select: function (field, date) {
-                                    //             // 선택한 날짜로 스토어 필터링
-                                    //             var formattedDate = Ext.Date.format(date, 'Y-m-d');
-                                    //             gridStore3.clearFilter(true);
-                                    //             gridStore3.filterBy(function (record) {
-                                    //                 var measureStartDate = Ext.Date.format(Ext.Date.parse(record.get('MESURE_BGNDT'), 'YmdHis'), 'Y-m-d');
-                                    //                 return measureStartDate === formattedDate;
-                                    //             });
-                                    //         },
-                                    //         clear: function () {
-                                    //             // 필터 클리어
-                                    //             gridStore3.clearFilter();
-                                    //         }
-                                    //     }
-                                    // },
                                     {
                                         xtype: 'datefield',
                                         fieldLabel: '시작 날짜',
